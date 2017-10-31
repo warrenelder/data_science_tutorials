@@ -1,0 +1,92 @@
+/*
+* SELECT OPERATIONS
+*/
+
+// Select all entries from all fields in table
+SELECT * FROM table;
+// Select distinct entries from field in table
+SELECT DISTINCT field FROM table;
+// Count entries from table
+SELECT COUNT(*) FROM table;
+// Count unique instances of field in table
+SELECT COUNT(DISTINCT field) from table;
+
+/*
+* QUERY OPERATIONS
+*/
+
+// Query entries using logical operators
+SELECT * FROM table WHERE field = 'string'; // Equal to string
+SELECT * FROM table WHERE field <> 'string'; // Not equal to string
+SELECT * FROM table WHERE field < number; // Less than number
+SELECT * FROM table WHERE field > number; // Greater than number
+
+// Query entries using like operation
+SELECT * FROM table WHERE field LIKE 'string%'; // The % wildcard will match zero, one, or many characters in text
+SELECT * FROM table WHERE field LIKE 'string_ab'; // The _ wildcard will match preceding chars eg 'ab'
+
+// Query entries for multiple conditions
+SELECT * FROM table WHERE field > 1994 AND field < 2000;
+
+// Query entries for multiple conditions under the OR condition
+SELECT * FROM table WHERE (field_a > 1994 AND field_a <= 1996)
+AND (field_b = 'string_a' OR field_b = 'string_b');
+
+// Query entries between condition values
+SELECT * FROM table WHERE (field BETWEEN 1 AND 5);
+
+// Query entries with multiple OR conditions using IN
+SELECT * FROM table WHERE (field IN (1,2,3,4));
+
+// Query entries that contain null values
+SELECT * FROM table WHERE field IS NULL;
+SELECT * FROM table WHERE field IS NOT NULL;
+
+/*
+* Aggregate Operations
+*/
+
+// Get Average (mean) value of field
+SELECT AVG(field) FROM table;
+
+// Get Max (also can use MIN) value of field
+SELECT MAX(field) FROM table;
+
+// Get Sum value from field
+SELECT SUM(field) FROM table;
+
+/*
+* Aliasing
+*/
+
+// Alias columns using AS
+SELECT MAX(field) AS max_field, MAX(field) AS max_field FROM table;
+
+// Aggregate functions and aliasing to calculate a percentage
+SELECT ((SELECT COUNT(*) FROM table WHERE field IS NULL) * 100.0 / COUNT(*)) AS percentage
+FROM table;
+
+/*
+* ORDER BY, GROUP BY and HAVING
+*/
+
+// Order field (string) alphabetically
+SELECT field FROM table ORDER BY field;
+
+// Order field (numeric) high to low
+SELECT field FROM table ORDER BY field DESC;
+
+// Group by field, and perform count on field labels
+SELECT field, count(*) FROM table GROUP BY field;
+
+// Group and order by to get max values
+SELECT year, country, MAX(budget) FROM table GROUP BY year, country ORDER BY year, country;
+
+// Group by a field_a that has (HAVING) a count of field_b over 10
+SELECT field_a FROM table GROUP BY field_a HAVING COUNT(*) > 10;
+
+/*
+* Joins
+*/
+
+// @TODO
