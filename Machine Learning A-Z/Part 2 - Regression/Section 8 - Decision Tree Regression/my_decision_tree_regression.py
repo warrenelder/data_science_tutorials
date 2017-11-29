@@ -45,6 +45,7 @@ regressor = DecisionTreeRegressor(criterion="mse",
                                   min_impurity_decrease=0., 
                                   min_impurity_split=None, 
                                   presort=False)
+regressor.fit(X, y)
 
 # Predicting a new result
 y_pred = regressor.predict(6.5)
