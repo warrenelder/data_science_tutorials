@@ -41,10 +41,27 @@ y_pred = regressor.predict(X_test)
 # Backward elimination (Note this library does not account for b0 X0 where x0 = 1)
 import statsmodels.formula.api as sm
 X = np.append(arr = np.ones(shape = (50,1)).astype(int), values = X, axis = 1)
-X_opt = X[:, [0, 1, 2, 3, 4, 5]]
+
 sl = 0.05
+
+X_opt = X[:, [0, 1, 2, 3, 4, 5]]
 regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
 regressor_ols.summary()
 
+X_opt = X[:, [0, 1, 3, 4, 5]]
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_ols.summary()
 
+X_opt = X[:, [0, 3, 4, 5]]
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_ols.summary()
 
+X_opt = X[:, [0, 3, 5]]
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_ols.summary()
+
+X_opt = X[:, [0, 3]]
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_ols.summary()
+
+y_pred_ols = regressor_ols.predict(X_test[:, [0,3]])
