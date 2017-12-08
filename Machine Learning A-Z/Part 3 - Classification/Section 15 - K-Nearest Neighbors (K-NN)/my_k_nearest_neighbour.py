@@ -6,14 +6,6 @@ Created on Fri Dec  8 15:22:21 2017
 @author: warren
 """
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec  8 13:48:12 2017
-
-@author: warren
-"""
-
 # K Nearest Neighbour
 
 # Importing the libraries
@@ -37,11 +29,11 @@ X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
 # Fitting using Logistic regression
-#from sklearn.linear_model import LogisticRegression
-#classifier = LogisticRegression(random_state = 0)
-#classifier.fit(X_train, y_train)
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors = 5, p = 2, metric = 'minkowski')
+classifier.fit(X_train, y_train)
 
-# Predict results
+# Prediction
 y_pred = classifier.predict(X_test)
 
 # Evaluate using a confusion matrix
